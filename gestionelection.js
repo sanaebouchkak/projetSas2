@@ -56,7 +56,7 @@ const candidats=[
     cin : "AB123456",
 nom : "Boushaba",
 prenom : "Soufiane",
-partiPolitique : "Indépendant",
+partiPolitique : "DEV",
 age: 40,
 electeurs: [],
    },
@@ -80,7 +80,8 @@ while(condition){
     const infos= parseInt(prompt(`
         1-ajouter un nouveau candidaat
         2-ajouter plusieurs candidat
-        3-afficher la liste de candidtas
+        3-afficher la liste de candidats
+
         4-voter pour un candidat
         5-modifier les informations d un candidat
         6-supprimer un candidat
@@ -153,7 +154,8 @@ function ajouterCandidat() {
         nom: nom,
         prenom: prenom,
         age: age,
-        partiPolitique: partiPolitique
+        partiPolitique: partiPolitique,
+        electeurs:[]
     };
 
     candidats.push(candidat);
@@ -162,19 +164,48 @@ function ajouterCandidat() {
 }
 
 
+function listeCandidats(){
+    const choix=prompt(`
+        1-tries les condidats
+        2-filtrer et afficher uniq les candidats d un parti specifique
+    `);
+    if (choix==="1"){
+ for(i=0;i<candidats.length-1;i++){
+        for(j=i+1;j<candidats.length;j++){
+            if(candidats[i].electeurs.length<candidats[j].electeurs.length){
+                swap=candidats[i]
+                candidats[i]=candidats[j]
+                candidats[j]=swap
+            }
+
+        }
+        
+
+        }
+  
+        console.log("CIN :", candidats[i].cin);
+        console.log("Nom :" ,candidats[i].prenom);
+        console.log("prenom :" ,candidats[i].prenom)
+        console.log("age",candidats[i].age)
+    }
+   
+      else if(choix==="2"){
+        const partipl=prompt('entrer un partie politique');
+        for (i=0;i<candidats.length;i++){
+  if(candidats[i].partiPolitique==partipl){
+            console.log(candidats[i])
+        }
+        }
+      
+      }
+    }
+
+
 
     
 
 
 
-
-     
-
-
-function listeCandidats(){
-    for(i=0;i<candidats.length;i++)
-        console.log(candidats[i]);
-}
 
 
 
@@ -195,11 +226,15 @@ const candidat={
     age:age,
 cin:cin,
 partiPolitique:partiPolitique,
+electeurs :[],
 
 };
 candidats.push(candidat);
 console.log(candidat);
 }
 }
-
+function voter(){
+    const proprecin=prompt('entrer   ton un propre CIN');
+    
+}
 
