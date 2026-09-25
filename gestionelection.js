@@ -49,7 +49,7 @@ ajouterCandidat();
 
               break;
              case 3:
-
+listeCandidats();
               break;
               case 4:
 
@@ -97,6 +97,13 @@ let candidat={
 };
 candidats.push(candidat);
 console.log('candidat bien ajouter',candidat)
+}
+
+
+
+function listeCandidats(){
+    for(i=0;i<candidats.length;i++)
+        console.log(candidats[i]);
 }
 
 
