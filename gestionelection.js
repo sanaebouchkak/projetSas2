@@ -133,11 +133,11 @@ listeCandidats();
 
 function ajouterCandidat() {
 
-    const cin = prompt("Entrer CIN : ");
+    const cinajout = prompt("Entrer CIN : ");
 
     for (let i = 0; i < candidats.length; i++) {
 
-        if (candidats[i].cin === cin) {
+        if (candidats[i].cin === cinajout) {
             console.log("CIN DEJA EXIST");
             return;
         }
@@ -149,7 +149,7 @@ function ajouterCandidat() {
     const partiPolitique = prompt("Entrer ton partiPolitique : ");
 
     const candidat = {
-        cin: cin,
+        cin: cinajout,
         nom: nom,
         prenom: prenom,
         age: age,
