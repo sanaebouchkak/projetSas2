@@ -215,7 +215,6 @@ function AffichagelisteCandidats(){
                 console.table(candidats)
         
     }
-   
       else if(choix==="2"){
         const partipl=prompt('entrer un partie politique  ');
         for (i=0;i<candidats.length;i++){
@@ -238,12 +237,8 @@ else if(choix==="3"){
             console.table(candidats[i])
         } 
         }
-   
-      
-      }
-
-
     }
+ }
 
 
 
@@ -308,22 +303,39 @@ function voter() {
 
 }
     function modifierCandidat(){
-        const cincandidat=prompt('entrer le cin de candidat pour changer partipolitique');
+const choix=prompt(`
+1-modifier le partipolitique ;
+2-modifer age d un candidat  ;
+
+    `)
+
+if(choix==="1"){
+  const cincandidat=prompt('entrer le cin de candidat pour changer partipolitique');
           const nouveaupartipolitique=prompt('enter nououveau parti politique')
 for(i=0;i<candidats.length;i++){
-   
-
-
-  
-    if(candidats[i].cin===cincandidat){
+   if(candidats[i].cin===cincandidat){
         candidats[i].partiPolitique=nouveaupartipolitique;
         console.log("Parti politique modifie avec succes",candidats[i]);
             
             return;
     }
-    
-    }
+      }
 }
+if (choix==="2"){
+    const cincandidat1=prompt('enter  enter un cin du candidat')
+const agemodif=parseInt(prompt('entrer un age pour modifer'));
+
+    for(i=0;i<candidats.length;i++){
+        if(candidats[i].age===agemodif){
+candidats[i].age=agemodif;
+console.log('age modifer avec succes ',candidats[i]);
+}
+ }
+}
+}
+
+
+
     
 
 
