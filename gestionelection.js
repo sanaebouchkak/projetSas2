@@ -51,20 +51,48 @@ console.log(
 
 const prompt=require('prompt-sync')();
 
-const candidats=[ 
-   {
-    cin : "AB123456",
-nom : "Boushaba",
-prenom : "Soufiane",
-partiPolitique : "DEV",
-age: 40,
-electeurs: [],
-   },
-   
-
-
-
-]
+const candidats= [
+    {
+        cin: "C001",
+        nom: "Alami",
+        prenom: "Yassine",
+        partiPolitique: "PJD",
+        age: 45,
+        electeurs: ["E001", "E002", "E003", "E004"]
+    },
+    {
+        cin: "C002",
+        nom: "Alaoui",
+        prenom: "Sara",
+        partiPolitique: "PAM",
+        age: 38,
+        electeurs: ["E005", "E006"]
+    },
+    {
+        cin: "C003",
+        nom: "Bennani",
+        prenom: "Omar",
+        partiPolitique: "PJD",
+        age: 50,
+        electeurs: ["E007", "E008", "E009"]
+    },
+    {
+        cin: "C004",
+        nom: "Amrani",
+        prenom: "Salma",
+        partiPolitique: "RNI",
+        age: 42,
+        electeurs: ["E010"]
+    },
+    {
+        cin: "C005",
+        nom: "Idrissi",
+        prenom: "Mehdi",
+        partiPolitique: "PAM",
+        age: 47,
+        electeurs: ["E011", "E012", "E013", "E014", "E015"]
+    }
+];
  
 
 
@@ -99,10 +127,10 @@ ajouterPlusieursC();
             break;
          
              case 3:
-listeCandidats();
+AffichagelisteCandidats();
               break;
               case 4:
-
+voter();
               break;
 
               case 5:
@@ -127,9 +155,7 @@ listeCandidats();
 
          }
 
-
-         
-       
+     
 }
 
 function ajouterCandidat() {
@@ -164,54 +190,59 @@ function ajouterCandidat() {
 }
 
 
-function listeCandidats(){
+
+
+function AffichagelisteCandidats(){
     const choix=prompt(`
         1-tries les condidats
         2-filtrer et afficher uniq les candidats d un parti specifique
+        3-afficher tous les candidats
     `);
     if (choix==="1"){
- for(i=0;i<candidats.length-1;i++){
-        for(j=i+1;j<candidats.length;j++){
+ for(let i=0;i<candidats.length-1;i++){
+        for(let j=i+1;j<candidats.length;j++){
             if(candidats[i].electeurs.length<candidats[j].electeurs.length){
                 swap=candidats[i]
                 candidats[i]=candidats[j]
                 candidats[j]=swap
             }
 
+
         }
         
 
         }
-  
-        console.log("CIN :", candidats[i].cin);
-        console.log("Nom :" ,candidats[i].prenom);
-        console.log("prenom :" ,candidats[i].prenom)
-        console.log("age",candidats[i].age)
+                console.table(candidats)
+        
     }
    
       else if(choix==="2"){
-        const partipl=prompt('entrer un partie politique');
+        const partipl=prompt('entrer un partie politique  ');
         for (i=0;i<candidats.length;i++){
-  if(candidats[i].partiPolitique==partipl){
-            console.log(candidats[i])
-        }
+            if(candidats[i].partiPolitique===partipl){ 
+                console.log(`
+                    CIN : ${candidats[i].cin}
+                    Nom et Prenom : ${candidats[i].nom } ${candidats[i].prenom}
+                    Age : ${candidats[i].age}
+                    Partie Politique : ${candidats[i].partiPolitique}
+                    Nombre de vote : ${candidats[i].electeurs}`);
+            }
+
+    
+           else if (candidats[i].partiPolitique!==partipl){
+                     console.log('Aucun partiPolitique ');
+            break;
+            }
         }
       
       }
+
+
     }
 
 
 
-    
-
-
-
-
-
-
-
-
-function ajouterPlusieursC(){
+    function ajouterPlusieursC(){
     const nombre =parseInt(prompt('combien tu vous vouler :'));
 for( let i=0;i<nombre;i++){
  const  cin=prompt('entrer CIN   :');
@@ -233,8 +264,42 @@ candidats.push(candidat);
 console.log(candidat);
 }
 }
+
+
 function voter(){
-    const proprecin=prompt('entrer   ton un propre CIN');
+  const proprecin=prompt("entrer proprecin");
+    //candidat.length kador el  a ka3 snadq 
+    for(let i=0;i<candidats.length;i++){
+
+       for (let j = 0 ; j < candidats[i].electeurs.length ; j++){
+        if ( proprecin === candidats[i].electeurs[j]){
+           
+            console.log("cin deja exist ")
+return;
+
+        }
+        else{
+            const cinducandidat=prompt("entrer le Cin");
+          for(i=0;i<candidats.length;i++){
+            if (candidats[i].cin===cinducandidat){
+                candidats[i].electeurs.push(proprecin);
+                console.log('vote enregister avec succes')
+                return;
+              
+              
+                ;
+            }
+          }
+        }
+       
+       }
+        }
+      
+    }
+
     
-}
+    
+    
+
+
 
