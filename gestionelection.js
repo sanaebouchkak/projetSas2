@@ -134,7 +134,7 @@ voter();
               break;
 
               case 5:
-
+modifierCandidat();
               break;
 
               case 6:
@@ -230,10 +230,15 @@ function AffichagelisteCandidats(){
 
     
            else if (candidats[i].partiPolitique!==partipl){
-                     console.log('Aucun partiPolitique ');
+                     console.log('Aucun parti ');
             break;
+
             }
+else if(choix==="3"){
+            console.table(candidats[i])
+        } 
         }
+   
       
       }
 
@@ -266,36 +271,63 @@ console.log(candidat);
 }
 
 
-function voter(){
-  const proprecin=prompt("entrer proprecin");
-    //candidat.length kador el  a ka3 snadq 
-    for(let i=0;i<candidats.length;i++){
+function voter() {
 
-       for (let j = 0 ; j < candidats[i].electeurs.length ; j++){
-        if ( proprecin === candidats[i].electeurs[j]){
-           
-            console.log("cin deja exist ")
-return;
+    const proprecin = prompt("Entrer le CIN de l'électeur");
 
-        }
-        else{
-            const cinducandidat=prompt("entrer le Cin");
-          for(i=0;i<candidats.length;i++){
-            if (candidats[i].cin===cinducandidat){
-                candidats[i].electeurs.push(proprecin);
-                console.log('vote enregister avec succes')
+    // Vérifier si le CIN existe déjà
+    for (let i = 0; i < candidats.length; i++) {
+
+        for (let j = 0; j < candidats[i].electeurs.length; j++) {
+
+            if (proprecin === candidats[i].electeurs[j]) {
+
+                console.log("CIN electeur  deja exist");
                 return;
-              
-              
-                ;
             }
-          }
         }
-       
-       }
-        }
-      
     }
+
+    // Si le CIN n'existe pas, demander le CIN du candidat
+    const cinducandidat = prompt("Entrer le CIN du candidat");
+
+    for (let i = 0; i < candidats.length; i++) {
+
+        if (candidats[i].cin === cinducandidat) {
+
+            candidats[i].electeurs.push(proprecin);
+
+            console.log("Vote enregistre avec succes");
+            return;
+        }
+    }
+
+    console.log("Candidat introuvable");
+
+
+
+}
+    function modifierCandidat(){
+        const cincandidat=prompt('entrer le cin de candidat pour changer partipolitique');
+          const nouveaupartipolitique=prompt('enter nououveau parti politique')
+for(i=0;i<candidats.length;i++){
+   
+
+
+  
+    if(candidats[i].cin===cincandidat){
+        candidats[i].partiPolitique=nouveaupartipolitique;
+        console.log("Parti politique modifie avec succes",candidats[i]);
+            
+            return;
+    }
+    
+    }
+}
+    
+
+
+    
 
     
     
