@@ -56,7 +56,7 @@ const candidats= [
         cin: "C001",
         nom: "Alami",
         prenom: "Yassine",
-        partiPolitique: "PJD",
+        partiPolitique: "PAM",
         age: 45,
         electeurs: ["E001", "E002", "E003", "E004"]
     },
@@ -109,7 +109,6 @@ while(condition){
         1-ajouter un nouveau candidaat
         2-ajouter plusieurs candidat
         3-afficher la liste de candidats
-
         4-voter pour un candidat
         5-modifier les informations d un candidat
         6-supprimer un candidat
@@ -138,19 +137,20 @@ modifierCandidat();
               break;
 
               case 6:
-
+suppCandidat();
               break;
 
               case 7:
-
+rechercheCandidat();
               break;
 
               case 8:
-
+statistiqueelecteurs();
               break;
 
               case 9:
-
+                condition=false;
+console.log("au revoir");
               break;
 
          }
@@ -234,7 +234,7 @@ function AffichagelisteCandidats(){
 
             }
 else if(choix==="3"){
-            console.table(candidats[i])
+            console.table(candidats)
         } 
         }
     }
@@ -321,6 +321,7 @@ for(i=0;i<candidats.length;i++){
     }
       }
 }
+
 if (choix==="2"){
     const cincandidat1=prompt('enter  enter un cin du candidat')
 const agemodif=parseInt(prompt('entrer un age pour modifer'));
@@ -334,6 +335,88 @@ console.log('age modifer avec succes ',candidats[i]);
 }
 }
 
+function rechercheCandidat(){
+//   count=0;
+    const nomcandidatRechercher=prompt('entrer le nom de candidat ')
+    for( let i=0;i<candidats.length;i++){
+        if(candidats[i].nom===nomcandidatRechercher){
+     console.log(candidats[i]);
+        //   count++;
+        //   if (count===2){
+        //     break;
+        //   }
+           
+        }
+    }
+}
+
+
+
+
+
+function suppCandidat(){
+const cincandidatsupp=prompt('enter le cin s il vous plait que vous supprimer');
+for(i=0; i<candidats.length;i++){
+   
+if(candidats[i].cin===cincandidatsupp){
+for (j=0;j<candidats.length-1;j++){
+    candidats[j]=candidats[j+1];
+
+candidats.length=candidats.length-1;
+  console.log("Candidat supprimé");
+break
+}
+}
+}
+}
+function statistiqueelecteurs(){
+    const choix=prompt(`
+      1-afficher le nombre total de candidats
+      2-afficher le nombre total de votes exprimes dans toutes l election
+      3-afficher le top3 des candidats ayant le plus votes
+      4-afficher le nombre de candidats par parti polotique  
+        `);
+        if(choix==="1"){
+           let count=0;
+            for(i=0;i<candidats.length;i++){
+count++;
+
+            }
+            console.log( " le nombre de candidats est:",count);
+        }
+
+        if(choix==="2"){
+               let total =0;
+for( let i=0;i<candidats.length;i++){
+
+total =total + candidats[i].electeurs.length;
+// ila bghina ghir candidat whed mkndiroch total
+    
+   
+}
+ console.log(' le nombre total de electeurs votes',total)
+
+        }
+
+        if(choix==="3"){
+            for( let i=0;i<candidats.length;i++){
+
+            }
+            
+        }
+        if(choix==="4"){
+            const nompartipolitique=prompt('enter partie politique pour affichage');
+            let count=0;
+            for(i=0;i<candidats.length;i++){
+              
+                    if(candidats[i].partiPolitique===nompartipolitique){
+                        count++;
+                    }
+                }
+                 console.log("Nombre de candidats du parti", nompartipolitique, ":", count);
+            }
+        }
+
 
 
     
@@ -344,6 +427,3 @@ console.log('age modifer avec succes ',candidats[i]);
     
     
     
-
-
-
