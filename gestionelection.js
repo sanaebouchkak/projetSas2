@@ -53,15 +53,15 @@ const prompt=require('prompt-sync')();
 
 const candidats= [
     {
-        cin: "C001",
-        nom: "Alami",
-        prenom: "Yassine",
+        cin: "HH123",
+        nom: "bouchkak",
+        prenom: "sanae",
         partiPolitique: "PAM",
         age: 45,
         electeurs: ["E001", "E002", "E003", "E004"]
     },
     {
-        cin: "C002",
+        cin: "HJ123",
         nom: "Alaoui",
         prenom: "Sara",
         partiPolitique: "PAM",
@@ -69,7 +69,7 @@ const candidats= [
         electeurs: ["E005", "E006"]
     },
     {
-        cin: "C003",
+        cin: "HC123",
         nom: "Bennani",
         prenom: "Omar",
         partiPolitique: "PJD",
@@ -77,7 +77,7 @@ const candidats= [
         electeurs: ["E007", "E008", "E009"]
     },
     {
-        cin: "C004",
+        cin: "HM123",
         nom: "Amrani",
         prenom: "Salma",
         partiPolitique: "RNI",
@@ -85,9 +85,49 @@ const candidats= [
         electeurs: ["E010"]
     },
     {
-        cin: "C005",
-        nom: "Idrissi",
+        cin: "HC123",
+        nom: "nainia",
         prenom: "Mehdi",
+        partiPolitique: "PAM",
+        age: 47,
+        electeurs: ["E011", "E012", "E013", "E014", "E015"]
+    },
+    {
+        cin: "HA123",
+        nom: "bouchkak",
+        prenom: "sanae",
+        partiPolitique: "PAM",
+        age: 45,
+        electeurs: ["E001", "E002", "E003", "E004"]
+    },
+    {
+        cin: "HO123",
+        nom: "sdaq",
+        prenom: "Sara",
+        partiPolitique: "PAM",
+        age: 38,
+        electeurs: ["E005", "E006"]
+    },
+    {
+        cin: "HP123",
+        nom: "lkhal",
+        prenom: "Omar",
+        partiPolitique: "PJD",
+        age: 50,
+        electeurs: ["E007", "E008", "E009"]
+    },
+    {
+        cin: "Hf123",
+        nom: "belouali",
+        prenom: "Salma",
+        partiPolitique: "RNI",
+        age: 42,
+        electeurs: ["E010"]
+    },
+    {
+        cin: "Hb123",
+        nom: "ait hmad",
+        prenom: "ayoub",
         partiPolitique: "PAM",
         age: 47,
         electeurs: ["E011", "E012", "E013", "E014", "E015"]
@@ -105,7 +145,7 @@ const candidats= [
 
 let condition =true;
 while(condition){
-    const infos= parseInt(prompt(`
+   console.log(`
         1-ajouter un nouveau candidaat
         2-ajouter plusieurs candidat
         3-afficher la liste de candidats
@@ -115,8 +155,8 @@ while(condition){
         7-recherche les candidtas
         8-statistique de election:
         9-quitter
-    `));
-         
+    `);
+         let infos=parseInt(prompt('entrer votre choix  :'))
          switch(infos){
             case 1:
 ajouterCandidat();
@@ -216,27 +256,27 @@ function AffichagelisteCandidats(){
         
     }
       else if(choix==="2"){
+        let TROUV=0;
         const partipl=prompt('entrer un partie politique  ');
-        for (i=0;i<candidats.length;i++){
+        for ( let i=0;i<candidats.length;i++){
             if(candidats[i].partiPolitique===partipl){ 
+                TROUV=1;
                 console.log(`
                     CIN : ${candidats[i].cin}
                     Nom et Prenom : ${candidats[i].nom } ${candidats[i].prenom}
                     Age : ${candidats[i].age}
                     Partie Politique : ${candidats[i].partiPolitique}
                     Nombre de vote : ${candidats[i].electeurs}`);
+                }
+            
             }
-
-    
-           else if (candidats[i].partiPolitique!==partipl){
+             if (TROUV==0){
                      console.log('Aucun parti ');
-            break;
-
             }
 else if(choix==="3"){
             console.table(candidats)
         } 
-        }
+        
     }
  }
 
@@ -303,11 +343,13 @@ function voter() {
 
 }
     function modifierCandidat(){
-const choix=prompt(`
-1-modifier le partipolitique ;
-2-modifer age d un candidat  ;
 
-    `)
+    console.log(`
+1 - Modifier le parti politique
+2 - Modifier l'âge d'un candidat
+`);
+
+const choix = prompt("Entrer votre choix : ");
 
 if(choix==="1"){
   const cincandidat=prompt('entrer le cin de candidat pour changer partipolitique');
@@ -325,12 +367,20 @@ for(i=0;i<candidats.length;i++){
 if (choix==="2"){
     const cincandidat1=prompt('enter  enter un cin du candidat')
 const agemodif=parseInt(prompt('entrer un age pour modifer'));
+if (isNaN(agemodif) || agemodif < 18) {
+    console.log("Age invalide");
+    return;
+}
 
-    for(i=0;i<candidats.length;i++){
-        if(candidats[i].age===agemodif){
+
+    for( let i=0;i<candidats.length;i++){
+        if(candidats[i].cin===cincandidat1){
 candidats[i].age=agemodif;
 console.log('age modifer avec succes ',candidats[i]);
+
+return;
 }
+
  }
 }
 }
@@ -341,12 +391,19 @@ function rechercheCandidat(){
     for( let i=0;i<candidats.length;i++){
         if(candidats[i].nom===nomcandidatRechercher){
      console.log(candidats[i]);
+
+     
         //   count++;
         //   if (count===2){
         //     break;
         //   }
            
         }
+        else if(nomcandidatRechercher!==candidats[i].nom){
+console.log('candidat no trouve')
+break;
+     }
+
     }
 }
 
@@ -399,9 +456,43 @@ total =total + candidats[i].electeurs.length;
         }
 
         if(choix==="3"){
+            
             for( let i=0;i<candidats.length;i++){
-
+               for (let  j = i + 1 ; j < candidats.length ; j++ ){
+                if (candidats[i].electeurs.length < candidats[j].electeurs.length){
+                   let swap = candidats[i] ;
+                   candidats[i] = candidats[j];
+                   candidats[j] = swap
+                }
+               }
             }
+            for (let i = 0 ; i < 3 ; i ++){
+                console.log(`
+                    CIN : ${candidats[i].cin}
+                    Le candida : ${candidats[i].nom}  ${candidats[i].prenom}
+                    Âge : ${candidats[i].age}
+                    Parti politique : ${candidats[i].partiPolitique}
+                    Les votes : ${candidats[i].electeurs.length}
+                    `)
+            
+            }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
             
         }
         if(choix==="4"){
@@ -416,6 +507,10 @@ total =total + candidats[i].electeurs.length;
                  console.log("Nombre de candidats du parti", nompartipolitique, ":", count);
             }
         }
+
+
+
+
 
 
 
